@@ -2,8 +2,8 @@ require('dotenv').config({ path: './.env' });
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-// const helmet = require('helmet');
-// const cors = require('cors');
+const helmet = require('helmet');
+const cors = require('cors');
 const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes');
 const { PORT, DB_ADDRESS } = require('./config');
@@ -19,8 +19,8 @@ mongoose.connect(DB_ADDRESS, {
 });
 
 // app.use(requestLogger);
-// app.use(helmet());
-// app.use(cors());
+app.use(helmet());
+app.use(cors());
 
 app.use(routes);
 // app.use(errorLogger);
