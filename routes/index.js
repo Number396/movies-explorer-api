@@ -4,13 +4,9 @@ const userRouter = require('./users');
 const movieRouter = require('./movies');
 const { login, createUser } = require('../controllers/users');
 const NotFoundError = require('../errors/not-found-err');
-// const { PATTERN } = require('../config');
 
 router.use('/users', userRouter);
 router.use('/movies', movieRouter);
-
-// router.post('/signup', createUser);
-// router.post('/signin', login);
 
 router.post('/signin', celebrate({
   body: Joi.object().keys({
