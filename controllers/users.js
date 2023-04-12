@@ -91,6 +91,10 @@ module.exports.updateUser = (req, res, next) => {
       res.send(user);
     })
     .catch((err) => {
+      if (err.code === 11000) {
+        next(new ConflictError(userEmailConflictError));
+        return;
+      }
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError(userValidationUpdateError));
       } else {

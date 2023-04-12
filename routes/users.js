@@ -9,11 +9,11 @@ const { auth } = require('../middlewares/auth');
 
 router.get('/me', auth, getUserById);
 
-router.patch('/me', celebrate({
+router.patch('/me', auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
   }),
-}), auth, updateUser);
+}), updateUser);
 
 module.exports = router;
