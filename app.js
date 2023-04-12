@@ -7,7 +7,7 @@ const cors = require('cors');
 const errorHandler = require('./middlewares/error-handler');
 const routes = require('./routes');
 const { PORT, DB_ADDRESS } = require('./config');
-// const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
@@ -18,12 +18,12 @@ mongoose.connect(DB_ADDRESS, {
   useNewUrlParser: true,
 });
 
-// app.use(requestLogger);
+app.use(requestLogger);
 app.use(helmet());
 app.use(cors());
 
 app.use(routes);
-// app.use(errorLogger);
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
